@@ -55,6 +55,7 @@ function postSum(req, res, next) {
     //om dette var en feil på oppgave teksten, og dette faktisk SKULLE være en en GET komando, så går det bra. slik skjer
     //om jeg faktisk skulle endre linken på et drastisk måte, så var ikke det veldig klart i dokumentasjonen
     //om jeg skule lage extra klient script, så var ikke det veldig klart i oppgaveteksten
+    //(jeg prøvde å lage extra klientscript. se på postTest.html om du vil se hva jeg prøvde før jeg ga opp)
 }
 server.get("/temp/sum/:a/:b", postSum)
 
