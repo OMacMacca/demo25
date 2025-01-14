@@ -27,7 +27,8 @@ function getPoem(req, res, next) {
 server.get("/temp/poem", getPoem)
 
 function getQuote(req, res, next) {
-    let aQuote = quotes[Math.floor(Math.random() * quotes.length) - 1]
+    let quoteNumber = Math.floor(Math.random() * quotes.length)
+    let aQuote = quotes[quoteNumber]
 
     res.status(HTTP_CODES.SUCCESS.OK).send(aQuote)
 }
