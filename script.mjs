@@ -4,22 +4,25 @@ import HTTP_CODES from './utils/httpCodes.mjs';
 const server = express();
 const port = (process.env.PORT || 8000);
 
-let poem = "First they came for the Communists And I did not speak out Because I was not a Communist"
-let quotes = [
-    "I tell you ladies, you dont know how much joy you will have until you begin to smash, smash, smash! -Carry Nation",
-    "First get your facts straight, Then distort them at your leasure -Mark Twain",
-    "Dogs look up to us. Cats look down on us. Pigs treat us as equals -Winston Churchill"
-]
 
 server.set('port', port);
 server.use(express.static('public'));
-
+//----uke 2----------------------------
 function getRoot(req, res, next) {
     res.status(HTTP_CODES.SUCCESS.OK).send('Hello World').end();
 
 }
 server.get("/", getRoot);
 
+//----uke 3----------------------------
+
+
+let poem = "First they came for the Communists And I did not speak out Because I was not a Communist"
+let quotes = [
+    "I tell you ladies, you dont know how much joy you will have until you begin to smash, smash, smash! -Carry Nation",
+    "First get your facts straight, Then distort them at your leasure -Mark Twain",
+    "Dogs look up to us. Cats look down on us. Pigs treat us as equals -Winston Churchill"
+]
 
 function getPoem(req, res, next) {
     res.status(HTTP_CODES.SUCCESS.OK).send(poem)
@@ -43,23 +46,133 @@ function postSum(req, res, next) {
 
     res.status(HTTP_CODES.SUCCESS.OK).send(sumText)
     
-    //du leger kansje merke til at denne koden heter "postSum", men bruker server.get
-    //ifølge oppgavebeskrivelsen så skal denne oppgaven utnytte post() metoden
-    //men jeg kan ikke klare å få det til
-    //om jeg bare prøver å bruke linken http://localhost:8000/temp/sum/a/b så prøver den å GETe linken.
-    //jeg prøvde å finne en måte å endre det sånn at linken gjør en POST komando ikke en GET
-    //men jeg kunne ikke finne nokk om å lage en link som blir til en post (uten å lage et eget klient script med formdata)
-    //det jeg fant ville at jeg skulle endre linken til noe som ligner på http://localhost:8000/temp/sum?method="post"a="25"/b="5"
-    //men det ga ingen mening, siden oppgaven sier at jeg må bruke /tmp/sum/a/b som Route. 
-    //derfor har jeg gjort denne koden om til en GET, siden det fungerte veldig bra.
-    //om dette var en feil på oppgave teksten, og dette faktisk SKULLE være en en GET komando, så går det bra. slik skjer
-    //om jeg faktisk skulle endre linken på et drastisk måte, så var ikke det veldig klart i dokumentasjonen
-    //om jeg skule lage extra klient script, så var ikke det veldig klart i oppgaveteksten
-    //(jeg prøvde å lage extra klientscript. se på postTest.html om du vil se hva jeg prøvde før jeg ga opp)
+    //nvm fikset
 }
-server.get("/temp/sum/:a/:b", postSum)
+server.post("/temp/sum/:a/:b", postSum)
 
 
+//----uke 4-------------------------------
+let suits = [
+    "Spades",
+    "Clubs",
+    "Hearts",
+    "Diamonds"
+]
+let values = [
+    "Ace",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+    "Jack",
+    "Queen",
+    "King"
+]
+
+function makeDeck(){
+    let standardDeck = []
+    for(let i = 0; i < suits.length; i++){
+        for(let j = 0; j < values.length; j++){
+            standardDeck.push(card(suits[i], values[j]))
+        }
+    }
+
+    return standardDeck
+}
+
+let standardDeck = makeDeck()
+
+function card(suit, value){
+    return {suit, value}
+}
+
+let decks = []
+
+function uniqueCode(){
+    let code = Math.floor(Math.random()*9999)
+    return code
+}
+
+function findDeck(id){
+    for(let i = 0; decks.length; i++){
+        if(decks[i].id == id){
+            return decks[i]
+        }
+        return null
+    }
+}
+
+function postDeck(req, res, next) {
+    let id
+    let alreadyExists = false
+    do{
+        alreadyExists = false
+        id = uniqueCode()
+        for(let i = 0; decks.length; i++){
+            let testDeck = decks[i]
+            if(testDeck.id = id){
+                alreadyExists = true
+            }
+        }
+    }
+    while(alreadyExists == false)
+    let newDeck = standardDeck
+
+    let DeckObj = {
+        "id": id,
+        "deck": newDeck
+    }
+
+    decks.push(DeckObj)
+
+    let testDeck = findDeck(id)
+
+    let someText = testDeck.id + " " + testDeck.deck
+
+    res.status(HTTP_CODES.SUCCESS.OK).send(someText)
+    
+}
+server.post("/temp/deck", postDeck)
+
+function patchShuffle(req, res, next) {
+    let a = Number(req.params.a)
+    let b = Number(req.params.b)
+    let sum = a + b
+    let sumText = sum.toString()
+
+    res.status(HTTP_CODES.SUCCESS.OK).send(sumText)
+    
+}
+server.post("/temp/deck/shuffle/:deck_id", patchShuffle)
+
+function getDeck(req, res, next) {
+    let a = Number(req.params.a)
+    let b = Number(req.params.b)
+    let sum = a + b
+    let sumText = sum.toString()
+
+    res.status(HTTP_CODES.SUCCESS.OK).send(sumText)
+    
+}
+server.post("/temp/deck/:deck_id", getDeck)
+
+function getCard(req, res, next) {
+    let a = Number(req.params.a)
+    let b = Number(req.params.b)
+    let sum = a + b
+    let sumText = sum.toString()
+
+    res.status(HTTP_CODES.SUCCESS.OK).send(sumText)
+    
+}
+server.post("/temp/deck/:deck_id/card", getCard)
+
+//----port ting---------------------------
 server.listen(server.get('port'), function () {
     console.log('server running', server.get('port'));
 });
