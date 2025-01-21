@@ -118,9 +118,10 @@ function postDeck(req, res, next) {
             let testDeck = decks[i]
             if(testDeck.id = id){
                 alreadyExists = true
+                break
             }
         }
-    }while(alreadyExists == false)
+    }while(alreadyExists == true)
     console.log("while loop finished")
 
     let newDeck = standardDeck
@@ -133,9 +134,9 @@ function postDeck(req, res, next) {
     decks.push(DeckObj)
     console.log("added deck")
 
-    let testDeck = findDeck(id)
+    let found = findDeck(id)
 
-    let someText = testDeck.id + " " + testDeck.deck
+    let someText = found.id + " " + found.deck
     console.log("found deck")
 
     res.status(HTTP_CODES.SUCCESS.OK).send(someText)
