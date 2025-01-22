@@ -1,0 +1,23 @@
+*{
+    background-color: brown;
+}
+
+#suit{
+    font-size: 400px;
+    display: inline-block;
+    position:absolute;
+    top:50px;
+    left:300px;
+    background-color:bisque;
+
+}
+
+#value{
+    font-size:100px;
+    display: inline-block;
+    position:absolute;
+    top:465px;
+    left:405px;
+    background-color: transparent;
+    justify-content: center;
+}

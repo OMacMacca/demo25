@@ -3,17 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styles.css">
     <title>Document</title>
 </head>
 <body>
+    <div><button onclick="MakeADeck()">Make a Deck</button></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div><button onclick="ShuffleDeck()">Shuffle</button><h3>id:</h3><input id="inputShuffle" type="text"></div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div><button onclick="getADeck()">Get a deck</button><h3>id:</h3><input id="inputDeck" type="text"></div>
+    <br>
+    <br>
+    <br>
+    <div><button onclick="getARandomCard()">Get a random card</button><h3>id:</h3><input id="inputRandomCard" type="text"></div>
     <h1 id="suit"><h2 id="value"></h2></h1>
 
-    <div><button onclick="MakeADeck">MakeADeck</button></div>
-    <div><button onclick="ShuffleDeck">MakeADeck</button></div>
-    <div><button onclick="getADeck">MakeADeck</button><h3>id:</h3><input id="inputDeck"></div>
-    <div><button onclick="getARandomCard">MakeADeck</button><h3>id:</h3><input id="inputRandomCard"></div>
-
     <script>
+        let inputShuffle = document.getElementById("inputShuffle")
+        let inputDeck = document.getElementById("inputDeck")
+        let inputRandomCard = document.getElementById("inputRandomCard")
+
+        let suitH = document.getElementById("suit")
+        let valueH = document.getElementById("value")
+
         suitChr = {
             "Spades": "♤",
             "Clubs": "♧",
@@ -22,7 +44,7 @@
 
         }
         valueChr = {
-            "One": "1",
+            "Ace": "A",
             "Two": "2",
             "Three": "3",
             "Four": "4",
@@ -31,24 +53,109 @@
             "Seven": "7",
             "Eight": "8",
             "Nine": "9",
-            "ten": "10",
+            "Ten": "10",
             "Jack": "J",
             "Queen": "Q",
             "King": "K"
         }
 
         async function MakeADeck() {
-           console.log("make Deck") 
+            try{
+                let url = "http://localhost:8000/temp/deck"
+                let cfg = {
+                    method: "POST"
+                }            
+            
+                let response = await fetch(url, cfg);
+            
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                
+                let data = await response.json();
+                
+                console.log(data)
+
+            }
+            catch(err){
+                    console.log(err)
+            }
         }
         async function ShuffleDeck() {
-            console.log("shuffled") 
+            try{
+                let shuffleId = inputShuffle.value
+                let url = "http://localhost:8000/temp/deck/shuffle/" + shuffleId
+                console.log(url)
+                let cfg = {
+                    method: "PATCH"
+                }            
+            
+                let response = await fetch(url, cfg);
+            
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                
+                let data = await response.json();
+                
+                console.log(data)
+
+                }
+            catch(err){
+                console.log(err)
+            }
         }
         async function getADeck() {
-            console.log("got deck") 
+            try{
+                let deckId = inputDeck.value
+                let url = "http://localhost:8000/temp/deck/" + deckId
+                let cfg = {
+                    method: "GET"
+                }            
+            
+                let response = await fetch(url, cfg);
+            
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                
+                let data = await response.json();
+                
+                console.log(data)
+
+            }
+            catch(err){
+                console.log(err)
+            }
         }
         async function getARandomCard() {
-            console.log("got card from") 
-        }
+            try{
+                let randomCardId = inputRandomCard.value
+                let url = "http://localhost:8000/temp/deck/" + randomCardId + "/card"
+                let cfg = {
+                    method: "GET"
+                }            
+            
+                let response = await fetch(url, cfg);
+            
+                if (!response.ok) {
+                    throw new Error(response.statusText);
+                }
+                
+                let data = await response.json();
+                
+                console.log(data)
+
+                thisCardValue = valueChr[data.value]
+                thisCardSuit = suitChr[data.suit]
+
+                suitH.innerText = thisCardSuit
+                valueH.innerText = thisCardValue
+
+            }
+            catch(err){
+                console.log(err)
+            }        }
     </script>
 </body>
 </html>
