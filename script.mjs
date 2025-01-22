@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { json } from 'express'
 import HTTP_CODES from './utils/httpCodes.mjs';
 
 const server = express();
@@ -99,30 +99,32 @@ function uniqueCode(){
 }
 
 function findDeck(id){
-    for(let i = 0; decks.length; i++){
+    for(let i = 0; i < decks.length; i++){
         if(decks[i].id == id){
             return decks[i]
         }
-        return null
     }
+    return null
 }
 
+const shuffle = (aArray) => { 
+    return aArray.sort(() => Math.random() - 0.5); 
+}; 
+
 function postDeck(req, res, next) {
-    console.log("postdeck started")
     let id
     let alreadyExists = false
     do{
         alreadyExists = false
         id = uniqueCode()
-        for(let i = 0; decks.length; i++){
+        for(let i = 0; i < decks.length; i++){
             let testDeck = decks[i]
-            if(testDeck.id = id){
+            if(testDeck.id == id){
                 alreadyExists = true
                 break
             }
         }
     }while(alreadyExists == true)
-    console.log("while loop finished")
 
     let newDeck = standardDeck
 
@@ -132,39 +134,48 @@ function postDeck(req, res, next) {
     }
 
     decks.push(DeckObj)
-    console.log("added deck")
 
     let found = findDeck(id)
 
-    let someText = found.id + " " + found.deck
-    console.log("found deck")
+    let cardNum = Math.floor(Math.random() * found.deck.length)
 
-    res.status(HTTP_CODES.SUCCESS.OK).send(someText)
-    console.log("should be finished")
+    let randomCard = found.deck[cardNum]
+    let someText = found.id
+
+    res.status(HTTP_CODES.SUCCESS.OK).send(someText + "")
 }
 server.post("/temp/deck", postDeck)
 
 function patchShuffle(req, res, next) {
-    let a = Number(req.params.a)
-    let b = Number(req.params.b)
-    let sum = a + b
-    let sumText = sum.toString()
+    let id = Number(req.params.id)
 
-    res.status(HTTP_CODES.SUCCESS.OK).send(sumText)
+    let deckToShuffle = findDeck(id)
+
+    let shuffled = shuffle(deckToShuffle.deck)
+
+    deckToShuffle.deck = shuffled
+
+    decks = decks.filter(decks => decks.id != id)
+
+    decks.push(deckToShuffle)
+
+    let deckString = JSON.stringify(decks)
+
+    res.status(HTTP_CODES.SUCCESS.OK).send(deckString)
     
 }
-server.post("/temp/deck/shuffle/:deck_id", patchShuffle)
+server.patch("/temp/deck/shuffle/:id", patchShuffle)
 
 function getDeck(req, res, next) {
-    let a = Number(req.params.a)
-    let b = Number(req.params.b)
-    let sum = a + b
-    let sumText = sum.toString()
+    let id = Number(req.params.id)
 
-    res.status(HTTP_CODES.SUCCESS.OK).send(sumText)
+    let wantedDeck = findDeck(id)
     
+    wantedDeck = JSON.stringify(wantedDeck)
+
+    res.status(HTTP_CODES.SUCCESS.OK).send(wantedDeck)
 }
-server.post("/temp/deck/:deck_id", getDeck)
+server.get("/temp/deck/:id", getDeck)
 
 function getCard(req, res, next) {
     let a = Number(req.params.a)
