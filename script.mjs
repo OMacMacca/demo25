@@ -161,7 +161,7 @@ function patchShuffle(req, res, next) {
 
     let deckString = JSON.stringify(decks)
 
-    res.status(HTTP_CODES.SUCCESS.OK).send(deckString)
+    res.status(HTTP_CODES.SUCCESS.OK).send("Shuffled")
     
 }
 server.patch("/temp/deck/shuffle/:id", patchShuffle)
@@ -178,15 +178,18 @@ function getDeck(req, res, next) {
 server.get("/temp/deck/:id", getDeck)
 
 function getCard(req, res, next) {
-    let a = Number(req.params.a)
-    let b = Number(req.params.b)
-    let sum = a + b
-    let sumText = sum.toString()
+    let id = Number(req.params.id)
 
-    res.status(HTTP_CODES.SUCCESS.OK).send(sumText)
+    let wantedDeck = findDeck(id)
+    
+    let wantedCard = wantedDeck.deck[Math.floor(Math.random() * wantedDeck.deck.length)]
+
+    wantedCard = JSON.stringify(wantedCard)
+
+    res.status(HTTP_CODES.SUCCESS.OK).send(wantedCard)
     
 }
-server.post("/temp/deck/:deck_id/card", getCard)
+server.get("/temp/deck/:id/card", getCard)
 
 //----port ting---------------------------
 server.listen(server.get('port'), function () {

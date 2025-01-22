@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="suit"><h2 id="value"></h2></h1>
+
+    <div><button onclick="MakeADeck">MakeADeck</button></div>
+    <div><button onclick="ShuffleDeck">MakeADeck</button></div>
+    <div><button onclick="getADeck">MakeADeck</button><h3>id:</h3><input id="inputDeck"></div>
+    <div><button onclick="getARandomCard">MakeADeck</button><h3>id:</h3><input id="inputRandomCard"></div>
+
+    <script>
+        suitChr = {
+            "Spades": "♤",
+            "Clubs": "♧",
+            "Hearts": "♡",
+            "Diamonds": "♢"
+
+        }
+        valueChr = {
+            "One": "1",
+            "Two": "2",
+            "Three": "3",
+            "Four": "4",
+            "Five": "5",
+            "Six": "6",
+            "Seven": "7",
+            "Eight": "8",
+            "Nine": "9",
+            "ten": "10",
+            "Jack": "J",
+            "Queen": "Q",
+            "King": "K"
+        }
+
+        async function MakeADeck() {
+           console.log("make Deck") 
+        }
+        async function ShuffleDeck() {
+            console.log("shuffled") 
+        }
+        async function getADeck() {
+            console.log("got deck") 
+        }
+        async function getARandomCard() {
+            console.log("got card from") 
+        }
+    </script>
+</body>
+</html>
