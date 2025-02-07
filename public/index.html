@@ -7,7 +7,16 @@
     <title>Document</title>
 </head>
 <body>
+    <h2>Authentication</h2>
+    <h3>Name:</h3><input id="inputName" type="text">
+    <h3>Password:</h3><input id="inputPassword" type="text">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <div><button onclick="MakeADeck()">Make a Deck</button></div>
+    <div><h1 id="idDisplay"></h1></div>
     <br>
     <br>
     <br>
@@ -32,6 +41,11 @@
         let inputShuffle = document.getElementById("inputShuffle")
         let inputDeck = document.getElementById("inputDeck")
         let inputRandomCard = document.getElementById("inputRandomCard")
+        let inputName = document.getElementById("inputName")
+        let inputPassword = document.getElementById("inputPassword")
+
+
+        let idDisplay = document.getElementById("idDisplay")
 
         let suitH = document.getElementById("suit")
         let valueH = document.getElementById("value")
@@ -61,11 +75,16 @@
 
         async function MakeADeck() {
             try{
+
                 let url = "http://localhost:8000/temp/deck"
                 let cfg = {
-                    method: "POST"
-                }            
-            
+                    method: "POST",
+                    headers: {
+                        "username": inputName.value,
+                        "password": inputPassword.value
+                    }
+                }
+
                 let response = await fetch(url, cfg);
             
                 if (!response.ok) {
@@ -76,9 +95,10 @@
                 
                 console.log(data)
 
+                idDisplay.innerText = data
             }
             catch(err){
-                    console.log(err)
+                console.log(err)
             }
         }
         async function ShuffleDeck() {
@@ -87,7 +107,11 @@
                 let url = "http://localhost:8000/temp/deck/shuffle/" + shuffleId
                 console.log(url)
                 let cfg = {
-                    method: "PATCH"
+                    method: "PATCH",
+                    headers: {
+                        "username": inputName.value,
+                        "password": inputPassword.value
+                    }
                 }            
             
                 let response = await fetch(url, cfg);
@@ -110,7 +134,11 @@
                 let deckId = inputDeck.value
                 let url = "http://localhost:8000/temp/deck/" + deckId
                 let cfg = {
-                    method: "GET"
+                    method: "GET",
+                    headers: {
+                        "username": inputName.value,
+                        "password": inputPassword.value
+                    }
                 }            
             
                 let response = await fetch(url, cfg);
@@ -133,7 +161,11 @@
                 let randomCardId = inputRandomCard.value
                 let url = "http://localhost:8000/temp/deck/" + randomCardId + "/card"
                 let cfg = {
-                    method: "GET"
+                    method: "GET",
+                    headers: {
+                        "username": inputName.value,
+                        "password": inputPassword.value
+                    }
                 }            
             
                 let response = await fetch(url, cfg);
@@ -155,7 +187,8 @@
             }
             catch(err){
                 console.log(err)
-            }        }
+            }        
+        }
     </script>
 </body>
 </html>

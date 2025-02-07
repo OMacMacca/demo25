@@ -1,5 +1,6 @@
 import express, { json } from 'express'
 import HTTP_CODES from './utils/httpCodes.mjs';
+import baseAuth from './modules/basicAuthentication.mjs';
 
 const server = express();
 const port = (process.env.PORT || 8000);
@@ -7,12 +8,14 @@ const port = (process.env.PORT || 8000);
 
 server.set('port', port);
 server.use(express.static('public'));
+
 //----uke 2----------------------------
 function getRoot(req, res, next) {
     res.status(HTTP_CODES.SUCCESS.OK).send('Hello World').end();
 
 }
 server.get("/", getRoot);
+
 
 //----uke 3----------------------------
 
@@ -93,6 +96,11 @@ function card(suit, value){
 
 let decks = []
 
+let credetials = {
+    username: "alex",
+    password: "haven8"
+}
+
 function uniqueCode(){
     let code = Math.floor(Math.random()*9999)
     return code
@@ -112,86 +120,103 @@ const shuffle = (aArray) => {
 }; 
 
 function postDeck(req, res, next) {
-    let id
-    let alreadyExists = false
-    do{
-        alreadyExists = false
-        id = uniqueCode()
-        for(let i = 0; i < decks.length; i++){
-            let testDeck = decks[i]
-            if(testDeck.id == id){
-                alreadyExists = true
-                break
+    if(req.loggedIn){
+        let id
+        let alreadyExists = false
+        do{
+            alreadyExists = false
+            id = uniqueCode()
+            for(let i = 0; i < decks.length; i++){
+                let testDeck = decks[i]
+                if(testDeck.id == id){
+                    alreadyExists = true
+                    break
+                }
             }
+        }while(alreadyExists == true)
+        
+        let newDeck = standardDeck
+    
+        let DeckObj = {
+            "id": id,
+            "deck": newDeck
         }
-    }while(alreadyExists == true)
-
-    let newDeck = standardDeck
-
-    let DeckObj = {
-        "id": id,
-        "deck": newDeck
+    
+        decks.push(DeckObj)
+    
+        let found = findDeck(id)
+    
+        let someText = found.id
+    
+        res.status(HTTP_CODES.SUCCESS.OK).send(someText + "")
+    }else{
+        res.status(HTTP_CODES.CLIENT_ERROR)
     }
 
-    decks.push(DeckObj)
-
-    let found = findDeck(id)
-
-    let cardNum = Math.floor(Math.random() * found.deck.length)
-
-    let randomCard = found.deck[cardNum]
-    let someText = found.id
-
-    res.status(HTTP_CODES.SUCCESS.OK).send(someText + "")
 }
-server.post("/temp/deck", postDeck)
+server.post("/temp/deck", baseAuth(credetials), postDeck)
 
 function patchShuffle(req, res, next) {
-    let id = Number(req.params.id)
+    if(req.loggedIn){
+        let id = Number(req.params.id)
 
-    let deckToShuffle = findDeck(id)
+        let deckToShuffle = findDeck(id)
 
-    let shuffled = shuffle(deckToShuffle.deck)
+        let shuffled = shuffle(deckToShuffle.deck)
 
-    deckToShuffle.deck = shuffled
+        deckToShuffle.deck = shuffled
 
-    decks = decks.filter(decks => decks.id != id)
+        decks = decks.filter(decks => decks.id != id)
 
-    decks.push(deckToShuffle)
+        decks.push(deckToShuffle)
 
-    let deckString = JSON.stringify(decks)
+        let deckString = JSON.stringify(decks)
 
-    res.status(HTTP_CODES.SUCCESS.OK).send("Shuffled")
+        console.log("am shuffle")
+
+        res.status(HTTP_CODES.SUCCESS.OK).send("Shuffled")
+    }else{
+        res.status(HTTP_CODES.CLIENT_ERROR)
+    }
     
 }
-server.patch("/temp/deck/shuffle/:id", patchShuffle)
+server.patch("/temp/deck/shuffle/:id", baseAuth(credetials), patchShuffle)
 
 function getDeck(req, res, next) {
-    let id = Number(req.params.id)
+    if(req.loggedIn){
+        let id = Number(req.params.id)
 
-    let wantedDeck = findDeck(id)
-    
-    wantedDeck = JSON.stringify(wantedDeck)
+        let wantedDeck = findDeck(id)
+        
+        wantedDeck = JSON.stringify(wantedDeck)
 
-    res.status(HTTP_CODES.SUCCESS.OK).send(wantedDeck)
+        res.status(HTTP_CODES.SUCCESS.OK).send(wantedDeck)
+    }else{
+        res.status(HTTP_CODES.CLIENT_ERROR)
+    }
 }
-server.get("/temp/deck/:id", getDeck)
+server.get("/temp/deck/:id", baseAuth(credetials), getDeck)
 
 function getCard(req, res, next) {
-    let id = Number(req.params.id)
+    if(req.loggedIn){
+        let id = Number(req.params.id)
 
-    let wantedDeck = findDeck(id)
-    
-    let wantedCard = wantedDeck.deck[Math.floor(Math.random() * wantedDeck.deck.length)]
+        let wantedDeck = findDeck(id)
+        
+        let wantedCard = wantedDeck.deck[Math.floor(Math.random() * wantedDeck.deck.length)]
 
-    wantedCard = JSON.stringify(wantedCard)
+        wantedCard = JSON.stringify(wantedCard)
 
-    res.status(HTTP_CODES.SUCCESS.OK).send(wantedCard)
+        res.status(HTTP_CODES.SUCCESS.OK).send(wantedCard)
+    }else{
+        res.status(HTTP_CODES.CLIENT_ERROR)
+    }
     
 }
-server.get("/temp/deck/:id/card", getCard)
+server.get("/temp/deck/:id/card", baseAuth(credetials), getCard)
 
 //----port ting---------------------------
+
 server.listen(server.get('port'), function () {
     console.log('server running', server.get('port'));
 });
