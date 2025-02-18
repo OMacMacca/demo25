@@ -220,13 +220,13 @@ server.get("/temp/deck/:id/card", baseAuth(credetials), getCard)
 
 //----uke 8--------------------------------
 
-const deck = require('./controlers/deckControler.mjs')
-const card = require('./controlers/cardControler.mjs')
+const deckCon = require('./controlers/deckControler.mjs')
+const cardCon = require('./controlers/cardControler.mjs')
 
 
 
-server.use('/deck', deck)
-server.use('/card', card)
+server.use('/deck', deckCon)
+server.use('/card', cardCon)
 
 
 //----port thing---------------------------
