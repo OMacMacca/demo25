@@ -92,7 +92,7 @@ cardRouter.delete('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
         let wantedDeck = findDeck(id)
 
 
-        wantedDeck.deck.splice(Math.floor(Math.random() * wantedDeck.length, 1))
+        wantedDeck.deck.splice(Math.floor(Math.random() * wantedDeck.deck.length, 1))
 
         res.send(wantedDeck)
     }else{
