@@ -1,8 +1,8 @@
 import express from 'express'
 import HTTP_CODES from './utils/httpCodes.mjs';
 import baseAuth from './modules/basicAuthentication.mjs';
-import * as deckCon from './controlers/deckControler.mjs'
-import * as cardCon from './controlers/cardControler.mjs'
+import deckRouter from './controlers/deckControler.mjs'
+import cardRouter from './controlers/cardControler.mjs'
 
 const server = express();
 const port = (process.env.PORT || 8000);
@@ -223,8 +223,8 @@ server.get("/temp/deck/:id/card", baseAuth(credetials), getCard)
 //----uke 8--------------------------------
 
 
-server.use('/deck', deckCon)
-server.use('/card', cardCon)
+server.use('/deck', deckRouter)
+server.use('/card', cardRouter)
 
 
 //----port thing---------------------------
