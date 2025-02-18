@@ -1,5 +1,5 @@
 import express from 'express'
-import decks from '../server.mjs'
+import {decks} from '../server.mjs'
 import baseAuth from '../modules/basicAuthentication.mjs';
 
 const cardRouter = express.Router()
