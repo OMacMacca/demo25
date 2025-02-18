@@ -1,8 +1,8 @@
 import express from 'express'
 import HTTP_CODES from './utils/httpCodes.mjs';
 import baseAuth from './modules/basicAuthentication.mjs';
-import deckCon from './controlers/deckControler.mjs'
-import cardCon from './controlers/cardControler.mjs'
+import {deckCon} from './controlers/deckControler.mjs'
+import {cardCon} from './controlers/cardControler.mjs'
 
 const server = express();
 const port = (process.env.PORT || 8000);
