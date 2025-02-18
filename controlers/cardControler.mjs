@@ -71,10 +71,10 @@ cardRouter.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
 
 
 
-        var ranSuit = suits[Math.floor(Math.random()*suits.length)]
-        var ranValue = values[Math.floor(Math.random()*values.length)]
+        let ranSuit = suits[Math.floor(Math.random()*suits.length)]
+        let ranValue = values[Math.floor(Math.random()*values.length)]
 
-        newCard = card(ranSuit, ranValue)
+        let newCard = card(ranSuit, ranValue)
 
         wantedDeck.push(newCard)
 
