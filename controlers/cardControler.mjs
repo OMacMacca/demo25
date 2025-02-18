@@ -85,7 +85,7 @@ cardRouter.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
 })
 
 // deletes a random card
-cardRouter.get('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
+cardRouter.delete('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.deckid)
 

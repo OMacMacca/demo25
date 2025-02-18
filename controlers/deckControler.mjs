@@ -131,8 +131,9 @@ deckRouter.post('/', baseAuth(credetials), (req, res) => {
     }})
 // shuffles
 
-deckRouter.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
+deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
+        console.log("check")
         let id = Number(req.params.id)
 
         let deckToShuffle = findDeck(id)
@@ -155,7 +156,7 @@ deckRouter.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
     }})
 
 // Deletes a given Deck
-deckRouter.get('/delete/:id', baseAuth(credetials), (req, res) => {
+deckRouter.delete('/delete/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.id)
 
