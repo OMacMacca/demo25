@@ -99,4 +99,4 @@ router.get('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
     }
 })
 
-module.exports = router
+export default router
