@@ -1,5 +1,5 @@
 import express from 'express'
-import {decks} from '../server.mjs'
+import {decks, addToDecks, chengeDecks} from '../server.mjs'
 import baseAuth from '../modules/basicAuthentication.mjs';
 
 const deckRouter = express.Router()
@@ -67,9 +67,11 @@ function findDeck(id){
 }
 
 function deleteDeck(id){
-    for(let i = 0; i < decks.length; i++){
-        if(decks[i].id == id){
-            decks.splice(i, 1);
+    tempDeck = decks
+    for(let i = 0; i < tempDeck.length; i++){
+        if(tempDeck[i].id == id){
+            tempDeck.splice(i, 1);
+            chengeDecks(tempDeck)
             return ("success")
         }
     }
@@ -142,9 +144,9 @@ deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
 
         deckToShuffle.deck = shuffled
 
-        decks = decks.filter(decks => decks.id != id)
+        chengeDecks(decks.filter(decks => decks.id != id)) 
 
-        decks.push(deckToShuffle)
+        addToDecks(deckToShuffle)
 
         let deckString = JSON.stringify(decks)
 

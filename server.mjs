@@ -98,6 +98,13 @@ function card(suit, value){
 
 export let decks = []
 
+export function addToDecks(aDeck){
+    decks.push(aDeck)
+}
+export function chengeDecks(aDecks){
+    decks = aDecks
+}
+
 let credetials = {
     username: "alex",
     password: "haven8"
