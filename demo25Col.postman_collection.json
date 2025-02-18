@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "98f04a35-47b4-454f-9210-778965999617",
+		"name": "demo25Col",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41344856"
+	},
+	"item": [
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "Create Deck",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/deck/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"deck",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/deck/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"deck",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5918"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shuffle Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/deck/shuffle/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"deck",
+								"shuffle",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1983"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/deck/delete/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"deck",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1983"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Random Card From Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/card/:deckid/getRandom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"card",
+								":deckid",
+								"getRandom"
+							],
+							"variable": [
+								{
+									"key": "deckid",
+									"value": "3759"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Random Card To Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/card/:deckid/addRandom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"card",
+								":deckid",
+								"addRandom"
+							],
+							"variable": [
+								{
+									"key": "deckid",
+									"value": "2855"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Random Card From Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/card/:deckid/deleteRandom",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"card",
+								":deckid",
+								"deleteRandom"
+							],
+							"variable": [
+								{
+									"key": "deckid",
+									"value": "8759"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PROD",
+			"item": [
+				{
+					"name": "Get Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo25-5516.onrender.com/deck/:id",
+							"protocol": "https",
+							"host": [
+								"demo25-5516",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"deck",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5918"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Deck",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo25-5516.onrender.com/deck/",
+							"protocol": "https",
+							"host": [
+								"demo25-5516",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"deck",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shuffle Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo25-5516.onrender.com/deck/shuffle/:id",
+							"protocol": "https",
+							"host": [
+								"demo25-5516",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"deck",
+								"shuffle",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1983"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo25-5516.onrender.com/deck/delete/:id",
+							"protocol": "https",
+							"host": [
+								"demo25-5516",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"deck",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1983"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Random Card From Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo25-5516.onrender.com/card/:deckid/getRandom",
+							"protocol": "https",
+							"host": [
+								"demo25-5516",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"card",
+								":deckid",
+								"getRandom"
+							],
+							"variable": [
+								{
+									"key": "deckid",
+									"value": "3759"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Random Card To Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo25-5516.onrender.com/card/:deckid/addRandom",
+							"protocol": "https",
+							"host": [
+								"demo25-5516",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"card",
+								":deckid",
+								"addRandom"
+							],
+							"variable": [
+								{
+									"key": "deckid",
+									"value": "2855"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Random Card From Deck",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "username",
+								"value": "alex",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "haven8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://demo25-5516.onrender.com/card/:deckid/deleteRandom",
+							"protocol": "https",
+							"host": [
+								"demo25-5516",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"card",
+								":deckid",
+								"deleteRandom"
+							],
+							"variable": [
+								{
+									"key": "deckid",
+									"value": "8759"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
