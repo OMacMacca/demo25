@@ -1,7 +1,7 @@
 import express from 'express'
 import baseAuth from '../modules/basicAuthentication.mjs';
 
-const router = express.Router()
+const deckRouter = express.Router()
 
 
 //----variables-----------------------------
@@ -80,7 +80,7 @@ const shuffle = (aArray) => {
 }; 
 
 // gets a certain deck
-router.get('/:id', baseAuth(credetials), (req, res) => {
+deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.id)
 
@@ -95,7 +95,7 @@ router.get('/:id', baseAuth(credetials), (req, res) => {
 })
 
 // created a new deck
-router.post('/', baseAuth(credetials), (req, res) => {
+deckRouter.post('/', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id
         let alreadyExists = false
@@ -130,7 +130,7 @@ router.post('/', baseAuth(credetials), (req, res) => {
     }})
 // shuffles
 
-router.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
+deckRouter.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.id)
 
@@ -158,7 +158,7 @@ router.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
     }})
 
 // Deletes a given Deck
-router.get('/delete/:id', baseAuth(credetials), (req, res) => {
+deckRouter.get('/delete/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.id)
 
@@ -173,4 +173,4 @@ router.get('/delete/:id', baseAuth(credetials), (req, res) => {
     }
 })
 
-export default router
+export default deckRouter

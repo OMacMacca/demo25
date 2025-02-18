@@ -223,8 +223,6 @@ server.get("/temp/deck/:id/card", baseAuth(credetials), getCard)
 //----uke 8--------------------------------
 
 
-
-
 server.use('/deck', deckCon)
 server.use('/card', cardCon)
 
@@ -234,3 +232,5 @@ server.use('/card', cardCon)
 server.listen(server.get('port'), function () {
     console.log('server running', server.get('port'));
 });
+
+export default server

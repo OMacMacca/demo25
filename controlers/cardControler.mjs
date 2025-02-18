@@ -1,7 +1,7 @@
 import express from 'express'
 import baseAuth from '../modules/basicAuthentication.mjs';
 
-const router = express.Router()
+const cardRouter = express.Router()
 
 //----variables------------------------------------
 let credetials = {
@@ -46,7 +46,7 @@ function card(suit, value){
 }
 
 // gets a random card from a given deck
-router.get('/:deckid/getRandom', baseAuth(credetials), (req, res) => {
+cardRouter.get('/:deckid/getRandom', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.deckid)
 
@@ -62,7 +62,7 @@ router.get('/:deckid/getRandom', baseAuth(credetials), (req, res) => {
     }})
 
 // adds a random card
-router.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
+cardRouter.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.deckid)
 
@@ -84,7 +84,7 @@ router.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
 })
 
 // deletes a random card
-router.get('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
+cardRouter.get('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.deckid)
 
@@ -99,4 +99,4 @@ router.get('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
     }
 })
 
-export default router
+export default cardRouter
