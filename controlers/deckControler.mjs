@@ -65,10 +65,19 @@ function findDeck(id){
     return null
 }
 
+function deleteDeck(id){
+    for(let i = 0; i < process.env.decks.length; i++){
+        if(process.env.decks[i].id == id){
+            process.env.decks.splice(i, 1);
+            return ("success")
+        }
+    }
+    return null
+}
+
 const shuffle = (aArray) => { 
     return aArray.sort(() => Math.random() - 0.5); 
 }; 
-
 
 // gets a certain deck
 router.get('/:id', baseAuth(credetials), (req, res) => {
@@ -150,7 +159,18 @@ router.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
 
 // Deletes a given Deck
 router.get('/delete/:id', baseAuth(credetials), (req, res) => {
-    res.send('About birds')
+    if(req.loggedIn){
+        let id = Number(req.params.id)
+
+        let deckToDelete = deleteDeck(id)
+        if(deckToDelete != null){
+            res.status(HTTP_CODES.SUCCESS.OK).send(deckToDelete)
+        }else{
+            res.status(HTTP_CODES.CLIENT_ERROR).send("Nothing was Deleted")
+        }
+    }else{
+        res.status(HTTP_CODES.CLIENT_ERROR)
+    }
 })
 
 module.exports = router

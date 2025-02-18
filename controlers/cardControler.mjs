@@ -8,6 +8,28 @@ let credetials = {
     username: "alex",
     password: "haven8"
 }
+
+let suits = [
+    "Spades",
+    "Clubs",
+    "Hearts",
+    "Diamonds"
+]
+let values = [
+    "Ace",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+    "Jack",
+    "Queen",
+    "King"
+]
 //----help functions-------------------------------
 
 function findDeck(id){
@@ -17,6 +39,10 @@ function findDeck(id){
         }
     }
     return null
+}
+
+function card(suit, value){
+    return {suit, value}
 }
 
 // gets a random card from a given deck
@@ -37,12 +63,40 @@ router.get('/:deckid/getRandom', baseAuth(credetials), (req, res) => {
 
 // adds a random card
 router.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
-    res.send('Birds home page')
+    if(req.loggedIn){
+        let id = Number(req.params.deckid)
+
+        let wantedDeck = findDeck(id)
+
+
+
+        var ranSuit = suits[Math.floor(Math.random()*suits.length)]
+        var ranValue = values[Math.floor(Math.random()*values.length)]
+
+        newCard = card(ranSuit, ranValue)
+
+        wantedDeck.push(newCard)
+
+        res.status(HTTP_CODES.SUCCESS.OK).send(wantedDeck)
+    }else{
+        res.status(HTTP_CODES.CLIENT_ERROR)
+    }
 })
 
 // deletes a random card
 router.get('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
-    res.send('Birds home page')
+    if(req.loggedIn){
+        let id = Number(req.params.deckid)
+
+        let wantedDeck = findDeck(id)
+
+
+        wantedDeck.splice(Math.floor(Math.random() * wantedDeck.length, 1))
+
+        res.status(HTTP_CODES.SUCCESS.OK).send(wantedDeck)
+    }else{
+        res.status(HTTP_CODES.CLIENT_ERROR)
+    }
 })
 
 module.exports = router
