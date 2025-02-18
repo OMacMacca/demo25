@@ -59,7 +59,7 @@ cardRouter.get('/:deckid/getRandom', baseAuth(credetials), (req, res) => {
 
         res.send(wantedCard)
     }else{
-        res.status(HTTP_CODES.CLIENT_ERROR)
+        res.send("error")
     }})
 
 // adds a random card
@@ -80,7 +80,7 @@ cardRouter.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
 
         res.send(wantedDeck)
     }else{
-        res.status(HTTP_CODES.CLIENT_ERROR)
+        res.send("error")
     }
 })
 
@@ -96,7 +96,7 @@ cardRouter.get('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
 
         res.send(wantedDeck)
     }else{
-        res.status(HTTP_CODES.CLIENT_ERROR)
+        res.send("error")
     }
 })
 

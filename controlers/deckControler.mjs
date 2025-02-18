@@ -91,7 +91,7 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 
         res.send(wantedDeck)
     }else{
-        res.status(HTTP_CODES.CLIENT_ERROR)
+        res.send("error")
     }
 })
 
@@ -127,7 +127,7 @@ deckRouter.post('/', baseAuth(credetials), (req, res) => {
     
         res.send(someText + "")
     }else{
-        res.status(HTTP_CODES.CLIENT_ERROR)
+        res.send("error")
     }})
 // shuffles
 
@@ -151,7 +151,7 @@ deckRouter.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
 
         res.send("Shuffled")
     }else{
-        res.status(HTTP_CODES.CLIENT_ERROR)
+        res.send("error")
     }})
 
 // Deletes a given Deck
@@ -166,7 +166,7 @@ deckRouter.get('/delete/:id', baseAuth(credetials), (req, res) => {
             res.send("Nothing was Deleted")
         }
     }else{
-        res.status(HTTP_CODES.CLIENT_ERROR)
+        res.send("error")
     }
 })
 
