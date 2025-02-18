@@ -96,7 +96,7 @@ function card(suit, value){
     return {suit, value}
 }
 
-process.env.decks = []
+export let decks = []
 
 let credetials = {
     username: "alex",
@@ -232,5 +232,3 @@ server.use('/card', cardRouter)
 server.listen(server.get('port'), function () {
     console.log('server running', server.get('port'));
 });
-
-export default server

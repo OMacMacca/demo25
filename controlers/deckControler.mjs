@@ -1,4 +1,5 @@
 import express from 'express'
+import decks from '../server.mjs'
 import baseAuth from '../modules/basicAuthentication.mjs';
 
 const deckRouter = express.Router()
@@ -57,18 +58,18 @@ function uniqueCode(){
 }
 
 function findDeck(id){
-    for(let i = 0; i < process.env.decks.length; i++){
-        if(process.env.decks[i].id == id){
-            return process.env.decks[i]
+    for(let i = 0; i < decks.length; i++){
+        if(decks[i].id == id){
+            return decks[i]
         }
     }
     return null
 }
 
 function deleteDeck(id){
-    for(let i = 0; i < process.env.decks.length; i++){
-        if(process.env.decks[i].id == id){
-            process.env.decks.splice(i, 1);
+    for(let i = 0; i < decks.length; i++){
+        if(decks[i].id == id){
+            decks.splice(i, 1);
             return ("success")
         }
     }
@@ -102,8 +103,8 @@ deckRouter.post('/', baseAuth(credetials), (req, res) => {
         do{
             alreadyExists = false
             id = uniqueCode()
-            for(let i = 0; i < process.env.decks.length; i++){
-                let testDeck = process.env.decks[i]
+            for(let i = 0; i < decks.length; i++){
+                let testDeck = decks[i]
                 if(testDeck.id == id){
                     alreadyExists = true
                     break
@@ -118,7 +119,7 @@ deckRouter.post('/', baseAuth(credetials), (req, res) => {
             "deck": newDeck
         }
     
-        process.env.decks.push(DeckObj)
+        decks.push(DeckObj)
     
         let found = findDeck(id)
     
@@ -140,15 +141,11 @@ deckRouter.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
 
         deckToShuffle.deck = shuffled
 
-        let decks = process.env.decks
-
         decks = decks.filter(decks => decks.id != id)
 
         decks.push(deckToShuffle)
 
         let deckString = JSON.stringify(decks)
-
-        process.env.decks = decks
 
         console.log("am shuffle")
 

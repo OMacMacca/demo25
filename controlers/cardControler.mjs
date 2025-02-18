@@ -1,4 +1,5 @@
 import express from 'express'
+import decks from '../server.mjs'
 import baseAuth from '../modules/basicAuthentication.mjs';
 
 const cardRouter = express.Router()
@@ -33,9 +34,9 @@ let values = [
 //----help functions-------------------------------
 
 function findDeck(id){
-    for(let i = 0; i < process.env.decks.length; i++){
-        if(process.env.decks[i].id == id){
-            return process.env.decks[i]
+    for(let i = 0; i < decks.length; i++){
+        if(decks[i].id == id){
+            return decks[i]
         }
     }
     return null
