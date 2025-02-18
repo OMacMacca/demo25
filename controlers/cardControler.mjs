@@ -1,4 +1,4 @@
-const express = require("express");
+import express from 'express'
 import baseAuth from '../modules/basicAuthentication.mjs';
 
 const router = express.Router()
