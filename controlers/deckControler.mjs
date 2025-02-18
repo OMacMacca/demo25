@@ -89,7 +89,7 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
         
         wantedDeck = JSON.stringify(wantedDeck)
 
-        res.status(HTTP_CODES.SUCCESS.OK).send(wantedDeck)
+        res.send(wantedDeck)
     }else{
         res.status(HTTP_CODES.CLIENT_ERROR)
     }
@@ -125,7 +125,7 @@ deckRouter.post('/', baseAuth(credetials), (req, res) => {
     
         let someText = found.id
     
-        res.status(HTTP_CODES.SUCCESS.OK).send(someText + "")
+        res.send(someText + "")
     }else{
         res.status(HTTP_CODES.CLIENT_ERROR)
     }})
@@ -149,7 +149,7 @@ deckRouter.put('/shuffle/:id', baseAuth(credetials), (req, res) => {
 
         console.log("am shuffle")
 
-        res.status(HTTP_CODES.SUCCESS.OK).send("Shuffled")
+        res.send("Shuffled")
     }else{
         res.status(HTTP_CODES.CLIENT_ERROR)
     }})
@@ -161,9 +161,9 @@ deckRouter.get('/delete/:id', baseAuth(credetials), (req, res) => {
 
         let deckToDelete = deleteDeck(id)
         if(deckToDelete != null){
-            res.status(HTTP_CODES.SUCCESS.OK).send(deckToDelete)
+            res.send(deckToDelete)
         }else{
-            res.status(HTTP_CODES.CLIENT_ERROR).send("Nothing was Deleted")
+            res.send("Nothing was Deleted")
         }
     }else{
         res.status(HTTP_CODES.CLIENT_ERROR)
