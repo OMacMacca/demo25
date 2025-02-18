@@ -118,7 +118,7 @@ deckRouter.post('/', baseAuth(credetials), (req, res) => {
             "deck": newDeck
         }
     
-        decks.push(DeckObj)
+        process.env.decks.push(DeckObj)
     
         let found = findDeck(id)
     
