@@ -67,7 +67,7 @@ function findDeck(id){
 }
 
 function deleteDeck(id){
-    tempDeck = decks
+    let tempDeck = decks
     for(let i = 0; i < tempDeck.length; i++){
         if(tempDeck[i].id == id){
             tempDeck.splice(i, 1);
