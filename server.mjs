@@ -1,4 +1,4 @@
-import express, { json } from 'express'
+import express from 'express'
 import HTTP_CODES from './utils/httpCodes.mjs';
 import baseAuth from './modules/basicAuthentication.mjs';
 
@@ -8,6 +8,8 @@ const port = (process.env.PORT || 8000);
 
 server.set('port', port);
 server.use(express.static('public'));
+
+const router = express.Router()
 
 //----uke 2----------------------------
 function getRoot(req, res, next) {
@@ -215,7 +217,18 @@ function getCard(req, res, next) {
 }
 server.get("/temp/deck/:id/card", baseAuth(credetials), getCard)
 
-//----port ting---------------------------
+//----uke 8--------------------------------
+
+const deck = require('./controlers/deckControler.mjs')
+const card = require('./controlers/cardControler.mjs')
+
+
+
+server.use('/deck', deck)
+server.use('/card', card)
+
+
+//----port thing---------------------------
 
 server.listen(server.get('port'), function () {
     console.log('server running', server.get('port'));
