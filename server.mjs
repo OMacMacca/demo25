@@ -9,8 +9,6 @@ const port = (process.env.PORT || 8000);
 server.set('port', port);
 server.use(express.static('public'));
 
-const router = express.Router()
-
 //----uke 2----------------------------
 function getRoot(req, res, next) {
     res.status(HTTP_CODES.SUCCESS.OK).send('Hello World').end();
@@ -96,7 +94,7 @@ function card(suit, value){
     return {suit, value}
 }
 
-let decks = []
+process.env.decks = []
 
 let credetials = {
     username: "alex",
@@ -109,9 +107,9 @@ function uniqueCode(){
 }
 
 function findDeck(id){
-    for(let i = 0; i < decks.length; i++){
-        if(decks[i].id == id){
-            return decks[i]
+    for(let i = 0; i < process.env.decks.length; i++){
+        if(process.env.decks[i].id == id){
+            return process.env.decks[i]
         }
     }
     return null
@@ -128,8 +126,8 @@ function postDeck(req, res, next) {
         do{
             alreadyExists = false
             id = uniqueCode()
-            for(let i = 0; i < decks.length; i++){
-                let testDeck = decks[i]
+            for(let i = 0; i < process.env.decks.length; i++){
+                let testDeck = process.env.decks[i]
                 if(testDeck.id == id){
                     alreadyExists = true
                     break
@@ -160,6 +158,7 @@ server.post("/temp/deck", baseAuth(credetials), postDeck)
 
 function patchShuffle(req, res, next) {
     if(req.loggedIn){
+        let decks = process.env.decks
         let id = Number(req.params.id)
 
         let deckToShuffle = findDeck(id)
@@ -173,6 +172,8 @@ function patchShuffle(req, res, next) {
         decks.push(deckToShuffle)
 
         let deckString = JSON.stringify(decks)
+
+        process.env.decks = decks
 
         console.log("am shuffle")
 
