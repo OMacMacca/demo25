@@ -220,8 +220,9 @@ server.get("/temp/deck/:id/card", baseAuth(credetials), getCard)
 
 //----uke 8--------------------------------
 
-const deckCon = Require('./controlers/deckControler.mjs')
-const cardCon = Require('./controlers/cardControler.mjs')
+import deckCon from './controlers/deckControler.mjs'
+import cardCon from './controlers/cardControler.mjs'
+
 
 
 
