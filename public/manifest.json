@@ -1,0 +1,13 @@
+{
+    "name": "Card App",
+    "icons": [
+      {
+        "src": "icons/Boomie Rangus.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "https://demo25-5516.onrender.com",
+    "display": "browser",
+    "prefer_related_applications": false
+  }
