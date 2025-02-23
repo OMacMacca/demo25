@@ -86,7 +86,7 @@
         async function MakeADeck() {
             try{
 
-                let url = "http://localhost:8000/temp/deck"
+                let url = "https://demo25-5516.onrender.com/temp/deck"
                 let cfg = {
                     method: "POST",
                     headers: {
@@ -114,7 +114,7 @@
         async function ShuffleDeck() {
             try{
                 let shuffleId = inputShuffle.value
-                let url = "http://localhost:8000/temp/deck/shuffle/" + shuffleId
+                let url = "https://demo25-5516.onrender.com/temp/deck/shuffle/" + shuffleId
                 console.log(url)
                 let cfg = {
                     method: "PATCH",
@@ -142,7 +142,7 @@
         async function getADeck() {
             try{
                 let deckId = inputDeck.value
-                let url = "http://localhost:8000/temp/deck/" + deckId
+                let url = "https://demo25-5516.onrender.com/temp/deck/" + deckId
                 let cfg = {
                     method: "GET",
                     headers: {
@@ -169,7 +169,7 @@
         async function getARandomCard() {
             try{
                 let randomCardId = inputRandomCard.value
-                let url = "http://localhost:8000/temp/deck/" + randomCardId + "/card"
+                let url = "https://demo25-5516.onrender.com/temp/deck/" + randomCardId + "/card"
                 let cfg = {
                     method: "GET",
                     headers: {
