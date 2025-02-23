@@ -39,26 +39,24 @@
     <h1 id="suit"><h2 id="value"></h2></h1>
 
     <script>
-        const registerServiceWorker = async () => {
+    const registerServiceWorker = async () => {
         if ("serviceWorker" in navigator) {
             try {
-            const registration = await navigator.serviceWorker.register("/sw.js", {
-                scope: "/",
-            });
-            if (registration.installing) {
-                console.log("Service worker installing");
-            } else if (registration.waiting) {
-                console.log("Service worker installed");
-            } else if (registration.active) {
-                console.log("Service worker active");
+                const registration = await navigator.serviceWorker.register("/sw.js", {
+                    scope: "/",
+                });
+                if (registration.installing) {
+                    console.log("Service worker installing");
+                } else if (registration.waiting) {
+                    console.log("Service worker installed");
+                } else if (registration.active) {
+                    console.log("Service worker active");
+                }
+                } catch (error) {
+                    console.error(`Registration failed with ${error}`);
+                }
             }
-            } catch (error) {
-            console.error(`Registration failed with ${error}`);
-            }
-        }
         };
-
-
 
         let inputShuffle = document.getElementById("inputShuffle")
         let inputDeck = document.getElementById("inputDeck")
@@ -212,7 +210,8 @@
             }        
         }
 
-        registerServiceWorker();
+    registerServiceWorker();
+    
     </script>
 </body>
 </html>
