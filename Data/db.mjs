@@ -1,7 +1,7 @@
 import pg from "pg"
 const { Client } = pg
 
-const Config = {
+const config = {
     connectionString: process.env.DB_CREDENTIALS,
     ssl: process.env.DB_SSL === "true" ? process.env.DB_SSL : { "rejectUnauthorized": false }
 }
