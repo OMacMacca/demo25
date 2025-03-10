@@ -6,7 +6,7 @@ const config = {
     ssl: process.env.DB_SSL === "true" ? process.env.DB_SSL : { "rejectUnauthorized": false }
 }
 
-const client = new Client(Config)
+const client = new Client(config)
 
 await client.connect()
 
