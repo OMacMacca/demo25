@@ -8,19 +8,19 @@ class ItemStore extends recordStoreAbstractInterface {
     }
 
     update(item) {
-        DbManager.create(`UPDATE "public"."decks" SET "deck" = $2 WHERE "id" = $1 RETURNING "id", "deck";`, item)
+        DbManager.update(`UPDATE "public"."decks" SET "deck" = $2 WHERE "id" = $1 RETURNING "id", "deck";`, item)
     }
 
     read(id) {
-        DbManager.create(`SELECT * FROM "decks" WHERE "id" = $1 RETURNING "id", "deck"`, id)
+        DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1 RETURNING "id", "deck"`, id)
     }
 
     readAllIds() {
-        DbManager.create(`SELECT * FROM "decks" RETURNING "id"`)
+        DbManager.readAllIds(`SELECT * FROM "decks" RETURNING "id"`)
     }
 
     purge(id) {
-        DbManager.create(`DELETE FROM decks WHERE "id" = $1 RETURNING "id", "deck"`, id)
+        DbManager.delete(`DELETE FROM decks WHERE "id" = $1 RETURNING "id", "deck"`, id)
     }
 }
 
