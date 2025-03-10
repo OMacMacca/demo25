@@ -24,6 +24,10 @@ async function read(statment, ...values) {
     return await runQuery(statment, ...values);
 }
 
+async function readAllIds(statment, ...values) {
+    return await runQuery(statment, ...values);
+}
+
 async function purge(statment, ...values) {
     return await runQuery(statment, ...values);
 }
@@ -54,6 +58,6 @@ async function runQuery(query, ...values) {
 }
 
 
-const DbManager = { create, update, read, purge };
+const DbManager = { create, update, read, readAllIds, purge };
 
 export default DbManager;
