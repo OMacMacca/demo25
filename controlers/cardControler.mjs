@@ -4,6 +4,9 @@ import baseAuth from '../modules/basicAuthentication.mjs';
 
 const cardRouter = express.Router()
 
+import ItemStore from '../Data/deckRecordStore.mjs';
+const storageHandler = new ItemStore();
+
 //----variables------------------------------------
 let credetials = {
     username: "alex",

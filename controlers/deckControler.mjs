@@ -4,6 +4,9 @@ import baseAuth from '../modules/basicAuthentication.mjs';
 
 const deckRouter = express.Router()
 
+import ItemStore from '../Data/deckRecordStore.mjs';
+const storageHandler = new ItemStore();
+
 
 //----variables-----------------------------
 let suits = [
@@ -98,7 +101,7 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 })
 
 // created a new deck
-deckRouter.post('/', baseAuth(credetials), (req, res) => {
+deckRouter.post('/', baseAuth(credetials), async (req, res) => {
     if(req.loggedIn){
         let id
         let alreadyExists = false
@@ -121,11 +124,9 @@ deckRouter.post('/', baseAuth(credetials), (req, res) => {
             "deck": newDeck
         }
     
-        decks.push(DeckObj)
+        const item = storageHandler.create(DeckObj);
     
-        let found = findDeck(id)
-    
-        let someText = found.id
+        let someText = item.id
     
         res.send(someText + "")
     }else{
