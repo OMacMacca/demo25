@@ -38,12 +38,13 @@ async function runQuery(query, ...values) {
         const result = client.query(statment, [...values])
 
         if (result.rowcount <= 0) {
-            throw new Error("No records made");
+            throw new Error("No records created");
         }
         return result.row[0];
 
     } catch (error) {
 
+        // Feilhåndtering 
         console.error(error);
         return null;
 
