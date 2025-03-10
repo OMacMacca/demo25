@@ -102,7 +102,7 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 
 // created a new deck
 deckRouter.post('/', baseAuth(credetials), async (req, res) => {
-    decks = storageHandler.readAllIds()
+    decks = await storageHandler.readAllIds()
     if(req.loggedIn){
         let id
         let alreadyExists = false
@@ -125,7 +125,7 @@ deckRouter.post('/', baseAuth(credetials), async (req, res) => {
             "deck": newDeck
         }
     
-        const item = storageHandler.create(DeckObj);
+        const item = await storageHandler.create(DeckObj);
     
         let someText = item.id
     
