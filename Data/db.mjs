@@ -1,5 +1,4 @@
 import pg from "pg"
-const { Client } = pg
 
 const config = {
     connectionString: process.env.DB_CREDENTIALS,
