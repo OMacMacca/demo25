@@ -8,10 +8,10 @@ function recordStoreAbstractInterface(){
     }
 }
 
-function create(item) {}
-function update(item) {}
-function read(id) {}
-function readAllIds() {}
-function purge(id) {}
+//function create(item) {}
+//function update(item) {}
+//function read(id) {}
+//function readAllIds() {}
+//function purge(id) {}
 
 export default recordStoreAbstractInterface

@@ -1,4 +1,4 @@
-import recordStoreAbstractInterface from "./recordStoreAbstractInterfact.mjs";
+import recordStoreAbstractInterface from "./recordStoreAbstractInterface.mjs";
 import DbManager from "./db.mjs";
 
 class ItemStore extends recordStoreAbstractInterface {
