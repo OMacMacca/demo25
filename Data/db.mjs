@@ -59,6 +59,6 @@ async function runQuery(query, ...values) {
 }
 
 
-const DbManager = { create, update, read, readAllIds, purge };
+const DbManager = { create, update, read, readAllIds, purge};
 
 export default DbManager;
