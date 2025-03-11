@@ -48,7 +48,7 @@ async function runQuery(query, ...values) {
         return null;
 
     } finally {
-        client.close();
+        client.release();
     }
 }
 
