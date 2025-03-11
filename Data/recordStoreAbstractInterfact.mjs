@@ -8,10 +8,10 @@ function recordStoreAbstractInterface(){
     }
 }
 
-function create(item) {throw Error("Not Implemented")}
-function update(item) {throw Error("Not Implemented")}
-function read(id) {throw Error("Not Implemented")}
-function readAllIds() {throw Error("Not Implemented")}
-function purge(id) {throw Error("Not Implemented")}
+function create(item) {}
+function update(item) {}
+function read(id) {}
+function readAllIds() {}
+function purge(id) {}
 
 export default recordStoreAbstractInterface
