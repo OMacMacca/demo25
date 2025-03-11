@@ -103,10 +103,10 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 // created a new deck
 deckRouter.post('/', baseAuth(credetials), async (req, res) => {
     //var allIds = await storageHandler.readAllIds()
-    /*if(req.loggedIn){
+    if(req.loggedIn){
         let id
         let alreadyExists = false
-        if(allIds != null){
+        /*if(allIds != null){
             do{
                 alreadyExists = false
                 id = uniqueCode()
