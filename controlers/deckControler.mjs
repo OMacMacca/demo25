@@ -102,8 +102,8 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 
 // created a new deck
 deckRouter.post('/', baseAuth(credetials), async (req, res) => {
-    var allIds = await storageHandler.readAllIds()
-    if(req.loggedIn){
+    //var allIds = await storageHandler.readAllIds()
+    /*if(req.loggedIn){
         let id
         let alreadyExists = false
         if(allIds != null){
@@ -120,8 +120,10 @@ deckRouter.post('/', baseAuth(credetials), async (req, res) => {
             }while(alreadyExists == true)
         }
         
+        */
         let newDeck = standardDeck
-    
+
+        id = uniqueCode()
         let DeckObj = {
             "id": id,
             "deck": newDeck
