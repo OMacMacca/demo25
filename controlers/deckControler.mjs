@@ -129,7 +129,7 @@ deckRouter.post('/', baseAuth(credetials), async (req, res) => {
     
         const item = storageHandler.create(DeckObj);
         
-        console.log(item)
+        console.log("returned: " + item)
 
         let someText = item.id
     

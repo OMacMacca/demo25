@@ -13,6 +13,7 @@ await client.connect()
 
 
 async function create(statment, ...values) {
+    console.log("statement used: " + statment)
     return await runQuery(statment, ...values);
 }
 

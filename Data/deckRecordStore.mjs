@@ -4,6 +4,7 @@ import DbManager from "./db.mjs";
 class ItemStore extends recordStoreAbstractInterface {
 
     create(item) {
+        console.log("object put in: " + item)
         DbManager.create(`INSERT INTO "public"."decks"("id", "deck") VALUES($1, $2) RETURNING "id", "deck";`, item)
     }
 
