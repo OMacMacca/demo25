@@ -15,9 +15,9 @@ class ItemStore extends RecordStoreAbstractInterface {
         DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1 RETURNING "id", "deck"`, id)
     }
 
-    readAllIds() {
+    /*readAllIds() {
         DbManager.readAllIds(`SELECT * FROM "decks" RETURNING "id"`)
-    }
+    }*/
 
     purge(id) {
         DbManager.delete(`DELETE FROM decks WHERE "id" = $1 RETURNING "id", "deck"`, id)

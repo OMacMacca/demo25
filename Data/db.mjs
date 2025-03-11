@@ -6,11 +6,6 @@ const config = {
     ssl: process.env.DB_SSL === "true" ? process.env.DB_SSL : { "rejectUnauthorized": false }
 }
 
-const client = new Client(config)
-
-await client.connect()
-
-
 
 async function create(statment, ...values) {
     console.log("statement used: " + statment)
@@ -25,9 +20,9 @@ async function read(statment, ...values) {
     return await runQuery(statment, ...values);
 }
 
-async function readAllIds(statment, ...values) {
+/*async function readAllIds(statment, ...values) {
     return await runQuery(statment, ...values);
-}
+}*/
 
 async function purge(statment, ...values) {
     return await runQuery(statment, ...values);
@@ -59,6 +54,6 @@ async function runQuery(query, ...values) {
 }
 
 
-const DbManager = { create, update, read, readAllIds, purge};
+const DbManager = { create, update, read, /*readAllIds,*/ purge};
 
 export default DbManager;
