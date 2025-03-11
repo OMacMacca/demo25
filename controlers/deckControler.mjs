@@ -128,7 +128,9 @@ deckRouter.post('/', baseAuth(credetials), async (req, res) => {
         }
     
         const item = await storageHandler.create(DeckObj);
-    
+        
+        console.log(item)
+
         let someText = item.id
     
         res.send(someText + "")
