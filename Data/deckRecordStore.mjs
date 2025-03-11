@@ -1,4 +1,4 @@
-//import RecordStoreAbstractInterface from "./recordStoreAbstractInterface.mjs";
+import RecordStoreAbstractInterface from "./recordStoreAbstractInterface.mjs";
 import DbManager from "./db.mjs";
 
 
