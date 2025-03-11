@@ -10,7 +10,7 @@ function RecordStoreAbstractInterface() {
 
 
 
-function create(item) {}
+function create(item) { throw Error("Not implemented") }
 function update(item) { throw Error("Not implemented") }
 function read(id) { throw Error("Not implemented") }
 function readAllIds() { throw Error("Not implemented") }
