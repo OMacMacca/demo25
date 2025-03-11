@@ -1,6 +1,6 @@
 function RecordStoreAbstractInterface() {
     return { 
-        create(item) {throw Error("Not Implemented")},
+        create(item) {},
         read(item) {throw Error("Not Implemented")},
         //readAllIds() {throw Error("Not Implemented")},
         update(item) {throw Error("Not Implemented")},
