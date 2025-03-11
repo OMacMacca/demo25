@@ -1,13 +1,11 @@
 function RecordStoreAbstractInterface() {
-    return { create, update, read, /*readAllIds,*/ purge}
+    return { 
+        create(item) {throw Error("Not Implemented")},
+        read(item) {throw Error("Not Implemented")},
+        //readAllIds() {throw Error("Not Implemented")},
+        update(item) {throw Error("Not Implemented")},
+        purge(item) {throw Error("Not Implemented")}
+    }
 }
-
-
-
-function create(item) {throw Error("Not Implemented")}
-function read(item) {throw Error("Not Implemented")}
-//function readAllIds() {throw Error("Not Implemented")}
-function update(item) {throw Error("Not Implemented")}
-function purge(item) {throw Error("Not Implemented")}
 
 export default RecordStoreAbstractInterface
