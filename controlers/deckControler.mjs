@@ -4,7 +4,7 @@ import baseAuth from '../modules/basicAuthentication.mjs';
 
 const deckRouter = express.Router()
 
-import ItemStore from '../Data/recordStoreAbstractInterface.mjs';
+import ItemStore from '../Data/deckRecordStore.mjs';
 const storageHandler = new ItemStore();
 
 
