@@ -1,7 +1,7 @@
-import recordStoreAbstractInterface from "./recordStoreAbstractInterface.mjs";
+import RecordStoreAbstractInterface from "./recordStoreAbstractInterface.mjs";
 import DbManager from "./db.mjs";
 
-class ItemStore extends recordStoreAbstractInterface {
+class ItemStore extends RecordStoreAbstractInterface {
 
     create(item) {
         console.log("object put in: " + item)

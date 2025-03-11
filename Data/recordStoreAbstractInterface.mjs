@@ -1,17 +1,19 @@
-function recordStoreAbstractInterface(){
+function RecordStoreAbstractInterface() {
     return {
         create,
         read,
         readAllIds,
         update,
-        purge,
+        purge
     }
 }
 
-//function create(item) {}
-//function update(item) {}
-//function read(id) {}
-//function readAllIds() {}
-//function purge(id) {}
 
-export default recordStoreAbstractInterface
+
+function create(id) { throw Error("Not implemented") }
+function update(item) { throw Error("Not implemented") }
+function read(item) { throw Error("Not implemented") }
+function readAllIds(item) { throw Error("Not implemented") }
+function purge(item) { throw Error("Not implemented") }
+
+export default RecordStoreAbstractInterface
