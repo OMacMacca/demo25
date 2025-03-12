@@ -29,7 +29,7 @@ async function purge(statment, ...values) {
 
 
 
-async function runQuery(query, ...values) {
+async function runQuery(statment, ...values) {
     const client = new pg.Client(config);
 
     try {
