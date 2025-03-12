@@ -92,6 +92,8 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 
         let wantedDeck = storageHandler.read(id)
         
+        console.log(wantedDeck)
+
         wantedDeck = JSON.stringify(wantedDeck)
 
         res.send(wantedDeck)
