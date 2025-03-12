@@ -17,8 +17,10 @@ class ItemStore extends RecordStoreAbstractInterface {
     }
 
     read(id) {
+        console.log(id)
         let fromDB = DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1 RETURNING "id", "deck"`, id)
         fromDB.deck = CSVtoObject(fromDB.deck)
+        console.log(fromDB)
         return fromDB
     }
 
