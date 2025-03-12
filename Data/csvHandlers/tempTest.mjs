@@ -15,6 +15,8 @@ console.log(theDeck)
 
 let CSVDeck = objectToCSV(theDeck)
 
+console.log(CSVDeck)
+
 let OBJDeck = CSVtoObject(CSVDeck)
 
 console.log(OBJDeck)
