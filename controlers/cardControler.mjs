@@ -36,14 +36,6 @@ let values = [
 ]
 //----help functions-------------------------------
 
-function findDeck(id){
-    for(let i = 0; i < decks.length; i++){
-        if(decks[i].id == id){
-            return decks[i]
-        }
-    }
-    return null
-}
 
 function card(suit, value){
     return {suit, value}
@@ -54,7 +46,7 @@ cardRouter.get('/:deckid/getRandom', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.deckid)
 
-        let wantedDeck = findDeck(id)
+        let wantedDeck = storageHandler.read(id)
         
         let wantedCard = wantedDeck.deck[Math.floor(Math.random() * wantedDeck.deck.length)]
 
@@ -70,7 +62,7 @@ cardRouter.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.deckid)
 
-        let wantedDeck = findDeck(id)
+        let wantedDeck = storageHandler.read(id)
 
         //console.log(wantedDeck)
 
@@ -80,6 +72,8 @@ cardRouter.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
         let newCard = card(ranSuit, ranValue)
 
         wantedDeck.deck.push(newCard)
+
+        storageHandler.update(wantedDeck)
 
         res.send(wantedDeck)
     }else{
@@ -92,12 +86,14 @@ cardRouter.delete('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.deckid)
 
-        let wantedDeck = findDeck(id)
+        let wantedDeck = storageHandler.read(id)
 
 
         wantedDeck.deck.splice(Math.floor(Math.random() * wantedDeck.deck.length), 1)
 
-        res.send(wantedDeck)
+        let updatedDeck = storageHandler.update(wantedDeck)
+        
+        res.send(updatedDeck)
     }else{
         res.send("error")
     }

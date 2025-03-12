@@ -90,7 +90,7 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.id)
 
-        let wantedDeck = findDeck(id)
+        let wantedDeck = storageHandler.read(id)
         
         wantedDeck = JSON.stringify(wantedDeck)
 
@@ -102,11 +102,11 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 
 // created a new deck
 deckRouter.post('/', baseAuth(credetials), async (req, res) => {
-    //var allIds = await storageHandler.readAllIds()
+    var allIds = storageHandler.readAllIds()
     if(req.loggedIn){
         let id
         let alreadyExists = false
-        /*if(allIds != null){
+        if(allIds != null){
             do{
                 alreadyExists = false
                 id = uniqueCode()
@@ -120,7 +120,6 @@ deckRouter.post('/', baseAuth(credetials), async (req, res) => {
             }while(alreadyExists == true)
         }
         
-        */
         let newDeck = standardDeck
 
         id = uniqueCode()
@@ -129,7 +128,7 @@ deckRouter.post('/', baseAuth(credetials), async (req, res) => {
             "deck": newDeck
         }
     
-        const item = await storageHandler.create(DeckObj);
+        const item = storageHandler.create(DeckObj);
         
         console.log("returned: " + item)
 
@@ -146,7 +145,7 @@ deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
         console.log("check")
         let id = Number(req.params.id)
 
-        let deckToShuffle = findDeck(id)
+        let deckToShuffle = storageHandler.read(id);
 
         let shuffled = shuffle(deckToShuffle.deck)
 
@@ -154,9 +153,9 @@ deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
 
         chengeDecks(decks.filter(decks => decks.id != id)) 
 
-        addToDecks(deckToShuffle)
+        let resault = storageHandler.update(deckToShuffle)
 
-        let deckString = JSON.stringify(decks)
+        //addToDecks(deckToShuffle)
 
         console.log("am shuffle")
 
@@ -170,7 +169,7 @@ deckRouter.delete('/delete/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.id)
 
-        let deckToDelete = deleteDeck(id)
+        let deckToDelete = storageHandler.purge(id)
         if(deckToDelete != null){
             res.send(deckToDelete)
         }else{
