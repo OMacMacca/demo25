@@ -36,7 +36,7 @@ async function runQuery(statment, ...values) {
         client.connect();
         const result = client.query(statment, [...values])
 
-        console.log(result.rowcount)
+        console.log(result)
 
         if (result.rowcount <= 0) {
             throw new Error("No records created");
