@@ -1,5 +1,10 @@
 function RecordStoreAbstractInterface() {
-    return { create, update, read, readAllIds, purge}
+    return { 
+        create, 
+        update,
+        read, 
+        readAllIds, 
+        purge}
 }
 
 
