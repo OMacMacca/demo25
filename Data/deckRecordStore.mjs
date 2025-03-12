@@ -8,12 +8,12 @@ class ItemStore extends RecordStoreAbstractInterface {
     create(item) {
         console.log("object put in: " + item)
         item.deck = objectToCSV(item.deck)
-        return DbManager.create(`INSERT INTO "public"."decks"("id", "deck") VALUES($1, $2) RETURNING "id", "deck";`, item)
+        return DbManager.create(`INSERT INTO "public" "decks"("id", "deck") VALUES($1, $2) RETURNING "id", "deck";`, item)
     }
 
     update(item) {
         item.deck = objectToCSV(item.deck)
-        return DbManager.update(`UPDATE "public"."decks" SET "deck" = $2 WHERE "id" = $1 RETURNING "id", "deck";`, item)
+        return DbManager.update(`UPDATE "public" "decks" SET "deck" = $2 WHERE "id" = $1 RETURNING "id", "deck";`, item)
     }
 
     read(id) {

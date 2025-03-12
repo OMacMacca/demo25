@@ -4,7 +4,8 @@ function RecordStoreAbstractInterface() {
         update,
         read, 
         readAllIds, 
-        purge}
+        purge
+    }
 }
 
 
