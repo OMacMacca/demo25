@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { response } from 'express'
 import {decks, addToDecks, chengeDecks} from '../server.mjs'
 import baseAuth from '../modules/basicAuthentication.mjs';
 
@@ -106,39 +106,42 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 
 // created a new deck
 deckRouter.post('/', baseAuth(credetials), async (req, res) => {
-    var allIds = storageHandler.readAllIds()
+
     if(req.loggedIn){
-        let id
-        let alreadyExists = false
-        if(allIds != null){
-            do{
-                alreadyExists = false
-                id = uniqueCode()
-                for(let i = 0; i < allIds.length; i++){
-                    let testDeck = allIds[i]
-                    if(testDeck.id == id){
-                        alreadyExists = true
-                        break
+        var idChecker = storageHandler.readAllIds()
+        .then((allIds) => {
+            let id
+            let alreadyExists = false
+            if(allIds != null){
+                do{
+                    alreadyExists = false
+                    id = uniqueCode()
+                    for(let i = 0; i < allIds.length; i++){
+                        let testDeck = allIds[i]
+                        if(testDeck.id == id){
+                            alreadyExists = true
+                            break
+                        }
                     }
-                }
-            }while(alreadyExists == true)
-        }
-        
-        let newDeck = standardDeck
+                }while(alreadyExists == true)
+            }
+            let newDeck = standardDeck
 
-        id = uniqueCode()
-        let DeckObj = {
-            "id": id,
-            "deck": newDeck
-        }
-    
-        const item = storageHandler.create(DeckObj);
+            id = uniqueCode()
+            let DeckObj = {
+                "id": id,
+                "deck": newDeck
+            }
         
-        console.log("returned: " + item)
-
-        let someText = item.id
+            const item = storageHandler.create(DeckObj)
+            .then((promise) => {
+                console.log("WantedDeck:")
+                console.log(promise)
+                let wantedDeck = JSON.stringify(promise)
     
-        res.send(someText + "")
+                res.send(wantedDeck)
+            })
+        })
     }else{
         res.send("error")
     }})
@@ -149,21 +152,24 @@ deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
         console.log("check")
         let id = Number(req.params.id)
 
-        let deckToShuffle = storageHandler.read(id);
 
-        let shuffled = shuffle(deckToShuffle.deck)
+        let deckReader = storageHandler.read(id)
+        .then((promise) => {
+            let deckToShuffle = promise
 
-        deckToShuffle.deck = shuffled
+            let shuffled = shuffle(promise.deck)
 
-        chengeDecks(decks.filter(decks => decks.id != id)) 
+            deckToShuffle.deck = shuffled
 
-        let resault = storageHandler.update(deckToShuffle)
+            let updater = storageHandler.update(deckToShuffle)
+            .then((resault) => {
+                console.log("am shuffle")
 
-        //addToDecks(deckToShuffle)
+                res.send(resault)
+            })
 
-        console.log("am shuffle")
+        })
 
-        res.send("Shuffled")
     }else{
         res.send("error")
     }})
@@ -172,13 +178,10 @@ deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
 deckRouter.delete('/delete/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.id)
-
-        let deckToDelete = storageHandler.purge(id)
-        if(deckToDelete != null){
-            res.send(deckToDelete)
-        }else{
-            res.send("Nothing was Deleted")
-        }
+        let deleter = storageHandler.purge(id)
+        .then((resault) => {
+            res.send(resault)
+        })
     }else{
         res.send("error")
     }
