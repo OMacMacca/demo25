@@ -36,7 +36,7 @@ async function runQuery(statment, ...values) {
         client.connect();
         const resault = await client.query(statment, [...values])
         
-        console.log(resault)
+        console.log("in database: "+resault)
 
 
         if (resault.rowCount <= 0) {
