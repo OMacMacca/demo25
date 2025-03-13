@@ -14,7 +14,7 @@ function RecordStoreAbstractInterface() {
                 promise.deck = CSVtoObject(promise.deck)
                 console.log("in the then statement after the conversion:")
                 console.log(promise)
-
+                return promise
             })
             return fromDB 
         },
