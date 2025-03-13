@@ -48,6 +48,7 @@ async function runQuery(statment, ...values) {
                 }
                 return resault.rows[0];
             })
+        return query
 
 
     } catch (error) {
