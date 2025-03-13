@@ -2,6 +2,9 @@ import DbManager from "./db.mjs";
 import { objectToCSV } from "./csvHandlers/ObjToCsv.mjs";
 import { CSVtoObject } from "./csvHandlers/CsvToObj.mjs";
 
+
+//i had a lot of problems extending this function's methods into a new class, so i baked them into the function directly. 
+//i know its not best practice for abstractions, but i wanted to get it done
 function RecordStoreAbstractInterface() {
     return { 
         create(item) {
