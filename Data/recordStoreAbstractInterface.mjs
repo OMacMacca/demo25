@@ -6,14 +6,10 @@ function RecordStoreAbstractInterface() {
     return { 
         create(item) {/*throw Error("Not Implemented")*/},
         async read(id) {
-            try {
-                let fromDB = await DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1`, id)
-                fromDB = CSVtoObject(fromDB)
-                console.log("in abstract: "+fromDB)
-                return fromDB
-            } catch (error) {
-                console.log(error)
-            }      
+            let fromDB = await DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1`, id)
+            fromDB = CSVtoObject(fromDB)
+            console.log("in abstract: "+fromDB)
+            return fromDB 
         },
         readAllIds() {/*throw Error("Not Implemented")*/},
         update(item) {/*throw Error("Not Implemented")*/},
