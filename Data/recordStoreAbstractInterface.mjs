@@ -5,8 +5,9 @@ import { CSVtoObject } from "./csvHandlers/CsvToObj.mjs";
 function RecordStoreAbstractInterface() {
     return { 
         create(item) {/*throw Error("Not Implemented")*/},
-        async read(id) {
+        read(id) {
             let fromDB = DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1`, id)
+            console.log("before convestions: " + fromDB)
             fromDB = CSVtoObject(fromDB)
             console.log("in abstract: "+fromDB)
             return fromDB 
