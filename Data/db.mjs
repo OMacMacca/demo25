@@ -18,7 +18,7 @@ async function update(statment, ...values) {
 async function read(statment, ...values) {
     try {
         let prom = await runQuery(statment, ...values);
-        console.log(prom)
+        console.log("in dbManager read: "+prom)
         return prom
     } catch (error) {
         

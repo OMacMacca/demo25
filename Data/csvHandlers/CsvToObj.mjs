@@ -1,6 +1,6 @@
 export const CSVtoObject = async (data, delimiter = ',') => {
     try {
-        console.log(data)
+        console.log("in CSVtoOBJ: " + data)
         const rows = await data.split('\n');
         const headers = deserializeRow(rows.shift(), delimiter);
         return rows.map((row) => {

@@ -9,7 +9,7 @@ function RecordStoreAbstractInterface() {
             try {
                 let fromDB = await DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1`, id)
                 fromDB = CSVtoObject(fromDB)
-                console.log(fromDB)
+                console.log("in abstract: "+fromDB)
                 return fromDB
             } catch (error) {
                 console.log(error)
