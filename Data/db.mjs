@@ -36,7 +36,7 @@ async function runQuery(statment, ...values) {
         client.connect();
         const resault = await client.query(statment, [...values])
         
-        console.log(resault)
+        console.log(resault.rows[0])
 
 
         if (resault.rowCount <= 0) {
