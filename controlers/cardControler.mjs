@@ -73,7 +73,7 @@ cardRouter.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
     
             promise.deck.push(newCard)
     
-            storageHandler.update(wantedDeck)
+            storageHandler.update(promise)
             .then((response) => {
                 res.send(response)
             })

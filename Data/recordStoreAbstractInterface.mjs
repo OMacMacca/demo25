@@ -57,6 +57,7 @@ function RecordStoreAbstractInterface() {
         purge(id) {
             let fromDB = DbManager.purge(`DELETE FROM decks WHERE "id" = $1 RETURNING "id", "deck"`, id)
             .then((promise) => {
+                promise.deck = CSVtoObject(promise.deck)
                 return promise
             })
             return fromDB
