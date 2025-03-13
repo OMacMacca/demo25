@@ -8,8 +8,7 @@ function RecordStoreAbstractInterface() {
         async read(id) {
             try {
                 let fromDB = await DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1`, id)
-                console.log(fromDB)
-                fromDB = await CSVtoObject(fromDB)
+                fromDB = CSVtoObject(fromDB)
                 console.log(fromDB)
                 return fromDB
             } catch (error) {

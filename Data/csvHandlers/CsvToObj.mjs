@@ -1,14 +1,18 @@
 export const CSVtoObject = async (data, delimiter = ',') => {
-    console.log( data)
-    const rows = await data.split('\n');
-    const headers = deserializeRow(rows.shift(), delimiter);
-    return rows.map((row) => {
-    const values = deserializeRow(row, delimiter);
-    return headers.reduce((obj, key, index) => {
-        obj[key] = values[index];
-        return obj;
-    }, {});
-    });
+    try {
+        console.log(data)
+        const rows = await data.split('\n');
+        const headers = deserializeRow(rows.shift(), delimiter);
+        return rows.map((row) => {
+        const values = deserializeRow(row, delimiter);
+        return headers.reduce((obj, key, index) => {
+            obj[key] = values[index];
+            return obj;
+        }, {});
+        }); 
+    } catch (error) {
+        
+    }
 };
 
 const deserializeCSV = (data, delimiter = ',') =>
