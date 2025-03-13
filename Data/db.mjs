@@ -17,7 +17,9 @@ async function update(statment, ...values) {
 
 async function read(statment, ...values) {
     try {
-        return await runQuery(statment, ...values);
+        let prom = await runQuery(statment, ...values);
+        console.log(prom)
+        return prom
     } catch (error) {
         
     }
