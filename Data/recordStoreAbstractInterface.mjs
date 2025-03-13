@@ -8,12 +8,13 @@ function RecordStoreAbstractInterface() {
         read(id) {
             let fromDB =  DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1`, id)
             .then((promise) => {
-                console.log("in the then statement: "+promise)
+                console.log("in the then statement before the convesrion:")
+                console.log(promise)
                 promise.deck = CSVtoObject(promise.deck)
+                console.log("in the then statement after the conversion:")
+                console.log(promise)
 
             })
-            console.log("before convestions: " + fromDB)
-            console.log("in abstract: "+fromDB)
             return fromDB 
         },
         readAllIds() {/*throw Error("Not Implemented")*/},
