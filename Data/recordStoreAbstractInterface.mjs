@@ -42,7 +42,7 @@ function RecordStoreAbstractInterface() {
         },
         update(item) {            
             item.deck = objectToCSV(item.deck)
-            let fromDB = DbManager.create(`UPDATE "public"."decks" SET "deck" = $2 WHERE "id" = $1 RETURNING "id", "deck";`, item)
+            let fromDB = DbManager.create(`UPDATE "public"."decks" SET "deck" = $2 WHERE "id" = $1 RETURNING "id", "deck";`, item.id, item.deck)
             .then((promise) => {
                 console.log("in the then statement before the convesrion:")
                 console.log(promise)
