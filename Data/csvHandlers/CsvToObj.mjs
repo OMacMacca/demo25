@@ -14,9 +14,6 @@ export const CSVtoObject = (data, delimiter = ',') => {
     }); 
 };
 
-const deserializeCSV = (data, delimiter = ',') =>
-    data.split('\n').map(row => deserializeRow(row, delimiter));
-
 const deserializeRow = (row, delimiter = ',') => {
     const values = [];
     let index = 0, matchStart = 0, isInsideQuotations = false;
@@ -30,7 +27,7 @@ const deserializeRow = (row, delimiter = ',') => {
             values.push(
                 row
                     .slice(matchStart, index)
-                    .replace(/^"|"$/g, '')
+                    .replace(/^"|"$|\r/g, '')
                     .replace(/""/g, '"')
                     .replace(/\\n/g, '\n')
             );
