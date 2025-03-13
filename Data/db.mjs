@@ -16,13 +16,7 @@ async function update(statment, ...values) {
 }
 
 async function read(statment, ...values) {
-    try {
-        let prom = await runQuery(statment, ...values);
-        console.log("in dbManager read: "+prom)
-        return prom
-    } catch (error) {
-        
-    }
+    return await runQuery(statment, ...values)
 }
 
 async function readAllIds(statment, ...values) {
