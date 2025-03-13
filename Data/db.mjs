@@ -16,7 +16,11 @@ async function update(statment, ...values) {
 }
 
 async function read(statment, ...values) {
-    return await runQuery(statment, ...values);
+    try {
+        return await runQuery(statment, ...values);
+    } catch (error) {
+        
+    }
 }
 
 async function readAllIds(statment, ...values) {

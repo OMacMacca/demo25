@@ -13,7 +13,7 @@ function RecordStoreAbstractInterface() {
                 console.log(fromDB)
                 return fromDB
             } catch (error) {
-                
+                console.log(error)
             }      
         },
         readAllIds() {/*throw Error("Not Implemented")*/},
