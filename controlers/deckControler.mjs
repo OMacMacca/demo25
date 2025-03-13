@@ -176,6 +176,7 @@ deckRouter.delete('/delete/:id', baseAuth(credetials), (req, res) => {
         let id = Number(req.params.id)
         let deleter = storageHandler.purge(id)
         .then((resault) => {
+            resault = JSON.stringify(resault)
             res.send(resault)
         })
     }else{
