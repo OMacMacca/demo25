@@ -28,7 +28,6 @@ const deserializeRow = (row, delimiter = ',') => {
                 row
                     .slice(matchStart, index)
                     .replace(/^"|"$|/g, '')
-                    .replace(/\r/g, '')
                     .replace(/""/g, '"')
                     .replace(/\\n/g, '\n')
             );
