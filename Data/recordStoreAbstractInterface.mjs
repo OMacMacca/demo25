@@ -5,6 +5,8 @@ import { CSVtoObject } from "./csvHandlers/CsvToObj.mjs";
 function RecordStoreAbstractInterface() {
     return { 
         create(item) {
+            console.log("object forme:")
+            console.log(item)
             item.deck = objectToCSV(item.deck)
             let fromDB = DbManager.create(`INSERT INTO "public"."decks"("id", "deck") VALUES($1, $2) RETURNING "id", "deck";`, item)
             .then((promise) => {
