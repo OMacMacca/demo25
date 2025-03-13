@@ -51,7 +51,7 @@ async function runQuery(statment, ...values) {
         return null;
 
     } finally {
-        client.close();
+        client.end();
     }
 }
 
