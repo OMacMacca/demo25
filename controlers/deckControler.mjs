@@ -92,8 +92,6 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
 
         let deckChecker = storageHandler.read(id)
         .then((promise) => {
-            console.log("WantedDeck:")
-            console.log(promise)
             let wantedDeck = JSON.stringify(promise.deck)
 
             res.send(wantedDeck)
@@ -135,8 +133,6 @@ deckRouter.post('/', baseAuth(credetials), async (req, res) => {
         
             const item = storageHandler.create(DeckObj)
             .then((promise) => {
-                console.log("WantedDeck:")
-                console.log(promise)
                 let wantedDeck = JSON.stringify(promise)
     
                 res.send(wantedDeck)
@@ -149,7 +145,6 @@ deckRouter.post('/', baseAuth(credetials), async (req, res) => {
 
 deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
-        console.log("check")
         let id = Number(req.params.id)
 
 
@@ -163,7 +158,6 @@ deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
 
             let updater = storageHandler.update(deckToShuffle)
             .then((resault) => {
-                console.log("am shuffle")
 
                 resault = JSON.stringify(resault)
 
