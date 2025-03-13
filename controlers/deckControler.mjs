@@ -90,11 +90,11 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
     if(req.loggedIn){
         let id = Number(req.params.id)
 
-        let wantedDeck = storageHandler.read(id)
+        let deckChecker = storageHandler.read(id)
         .then((promise) => {
             console.log("WantedDeck:")
             console.log(promise)
-            wantedDeck = JSON.stringify(wantedDeck)
+            wantedDeck = JSON.stringify(promise.deck)
 
             res.send(wantedDeck)
         })
