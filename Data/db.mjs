@@ -45,7 +45,7 @@ async function runQuery(statment, ...values) {
         if (result.rowCount <= 0) {
             throw new Error("No records created");
         }
-        console.log("in runQuery: "+result.rows[0])
+        console.log("in runQuery: "+ result)
         return result.rows[0];
 
     } catch (error) {
