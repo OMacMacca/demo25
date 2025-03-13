@@ -165,6 +165,8 @@ deckRouter.patch('/shuffle/:id', baseAuth(credetials), (req, res) => {
             .then((resault) => {
                 console.log("am shuffle")
 
+                let resault = JSON.stringify(resault)
+
                 res.send(resault)
             })
 

@@ -55,7 +55,7 @@ function RecordStoreAbstractInterface() {
             return fromDB
         },
         purge(id) {
-            let fromDB = DbManager.delete(`DELETE FROM decks WHERE "id" = $1 RETURNING "id", "deck"`, id)
+            let fromDB = DbManager.purge(`DELETE FROM decks WHERE "id" = $1 RETURNING "id", "deck"`, id)
             .then((promise) => {
                 return promise
             })
