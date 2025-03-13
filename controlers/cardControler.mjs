@@ -96,7 +96,7 @@ cardRouter.delete('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
 
             storageHandler.update(promise)
             .then((promise) => {
-                response = JSON.stringify(response)
+                promise = JSON.stringify(promise)
                 res.send(promise)
             })
         })
