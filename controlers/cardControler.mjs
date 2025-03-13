@@ -75,6 +75,7 @@ cardRouter.post('/:deckid/addRandom', baseAuth(credetials), (req, res) => {
     
             storageHandler.update(promise)
             .then((response) => {
+                response = JSON.stringify(response)
                 res.send(response)
             })
         })
@@ -95,6 +96,7 @@ cardRouter.delete('/:deckid/deleteRandom', baseAuth(credetials), (req, res) => {
 
             storageHandler.update(promise)
             .then((promise) => {
+                response = JSON.stringify(response)
                 res.send(promise)
             })
         })
