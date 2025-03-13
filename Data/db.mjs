@@ -41,14 +41,14 @@ async function runQuery(statment, ...values) {
     try {
         client.connect();
         const query = await client.query(statment, [...values])
-            .then(function(resault){
+            .then((resault) => {
                 console.log("in runQuery: "+ resault.promise)
                 if (resault.rowCount <= 0) {
                     throw new Error("No records created");
                 }
                 return resault.rows[0];
             })
-        return query
+
 
     } catch (error) {
 
