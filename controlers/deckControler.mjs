@@ -94,7 +94,7 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
         .then((promise) => {
             console.log("WantedDeck:")
             console.log(promise)
-            wantedDeck = JSON.stringify(promise.deck)
+            let wantedDeck = JSON.stringify(promise.deck)
 
             res.send(wantedDeck)
         })
