@@ -8,7 +8,7 @@ function RecordStoreAbstractInterface() {
             console.log("object forme:")
             console.log(item)
             item.deck = objectToCSV(item.deck)
-            let fromDB = DbManager.create(`INSERT INTO "public"."decks"("id", "deck") VALUES($1, $2) RETURNING "id", "deck";`, item)
+            let fromDB = DbManager.create(`INSERT INTO "public"."decks"("id", "deck") VALUES($1, $2) RETURNING "id", "deck";`, item.id, item.deck)
             .then((promise) => {
                 console.log("in the then statement before the convesrion:")
                 console.log(promise)
@@ -34,7 +34,7 @@ function RecordStoreAbstractInterface() {
             return fromDB 
         },
         readAllIds() {
-            let fromDB = DbManager.readAllIds(`SELECT * FROM "decks" RETURNING "id"`)
+            let fromDB = DbManager.readAllIds(`SELECT "id" FROM "decks"`)
             .then((promise) => {
                 return promise
             })
