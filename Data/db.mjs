@@ -40,7 +40,7 @@ async function runQuery(statment, ...values) {
 
     try {
         client.connect();
-        const result = await client.query(statment, [...values])
+        const result = client.query(statment, [...values])
         console.log("in runQuery: "+ result.rows[0])
 
 
