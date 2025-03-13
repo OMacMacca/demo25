@@ -10,7 +10,7 @@ function RecordStoreAbstractInterface() {
             .then((promise) => {
                 console.log("in the then statement before the convesrion:")
                 console.log(promise)
-                promise.deck = promise.deck.replace("\r", '')
+                promise.deck = promise.deck.replace(/\r/g, '')
                 promise.deck = CSVtoObject(promise.deck)
                 console.log("in the then statement after the conversion:")
                 console.log(promise)
