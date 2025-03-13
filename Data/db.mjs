@@ -7,7 +7,6 @@ const config = {
 
 
 async function create(statment, ...values) {
-    console.log("statement used: " + statment)
     return await runQuery(statment, ...values);
 }
 
@@ -36,7 +35,6 @@ async function runQuery(statment, ...values) {
         client.connect();
         const resault = await client.query(statment, [...values])
         
-        console.log(resault.rows[0])
 
 
         if (resault.rowCount <= 0) {

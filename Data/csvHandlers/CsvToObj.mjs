@@ -1,8 +1,5 @@
 export const CSVtoObject = (data, delimiter = ',') => {
-    console.log(typeof(data))
     data = data + ""
-    console.log(typeof(data))
-    console.log("in CSVtoOBJ: " + data)
     const rows = data.split('\n');
     const headers = deserializeRow(rows.shift(), delimiter);
     return rows.map((row) => {

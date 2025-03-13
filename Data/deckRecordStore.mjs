@@ -6,7 +6,6 @@ import { CSVtoObject } from "./csvHandlers/CsvToObj.mjs";
 
 class ItemStore extends RecordStoreAbstractInterface {
     create(item) {
-        console.log("object put in: " + item)
         item.deck = objectToCSV(item.deck)
         return DbManager.create(`INSERT INTO "public"."decks"("id", "deck") VALUES($1, $2) RETURNING "id", "deck";`, item)
     }
@@ -17,10 +16,8 @@ class ItemStore extends RecordStoreAbstractInterface {
     }
 
     read(id) {
-        console.log(id)
         let fromDB = DbManager.read(`SELECT * FROM "decks" WHERE "id" = $1 RETURNING "id", "deck"`, id)
         fromDB.deck = CSVtoObject(fromDB.deck)
-        console.log(fromDB)
         return fromDB
     }
 
