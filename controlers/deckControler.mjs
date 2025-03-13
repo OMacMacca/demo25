@@ -91,13 +91,12 @@ deckRouter.get('/:id', baseAuth(credetials), (req, res) => {
         let id = Number(req.params.id)
 
         let wantedDeck = storageHandler.read(id)
-        .then((promise) => console.log(promise))
         .then((promise) => {
-            return promise
+            console.log("WantedDeck:")
+            console.log(promise)
         })
 
-        console.log("WantedDeck:")
-        console.log(wantedDeck)
+
 
         wantedDeck = JSON.stringify(wantedDeck)
 
